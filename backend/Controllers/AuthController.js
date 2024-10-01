@@ -2,7 +2,7 @@ const UserModel = require("../Models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const signup = async (req, res) => {
+const student_signup = async (req, res) => {
     try {
         const {name, email, password} = req.body;
         const user = await UserModel.findOne({email});
@@ -19,7 +19,7 @@ const signup = async (req, res) => {
     }
 }
 
-const login = async (req, res) => {
+const student_login = async (req, res) => {
     try {
         const {email, password} = req.body;
         const user = await UserModel.findOne({email});
@@ -34,7 +34,7 @@ const login = async (req, res) => {
 
         const jwtToken = jwt.sign(
             {email: user.email, _id: user._id},
-            process.env.JWT_SECRET,
+            process.env.JWT_SECRET_STUDENT,
             {expiresIn : "24h"}
         )
         
@@ -45,6 +45,6 @@ const login = async (req, res) => {
 }
 
 module.exports = {
-    signup,
-    login
+    student_signup,
+    student_login
 }

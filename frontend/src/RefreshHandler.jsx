@@ -12,10 +12,10 @@ const RefreshHandler = ({ setIsAuthenticated }) => {
       setIsAuthenticated(true);
       if (
         location.pathname === "/" ||
-        location.pathname === "/login" ||
-        location.pathname === "/signup"
+        location.pathname === "/student-login" ||
+        location.pathname === "/student-signup"
       ) {
-        navigate("/home", { replace: false });
+        navigate("/student-home", { replace: false });
       }
     }
   }, [location, navigate, setIsAuthenticated]);

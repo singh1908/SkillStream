@@ -2,7 +2,7 @@ const Joi = require("joi");
 // joi validate karta hai data types aur required fields ko.
 // It allows you to define schemas for your data and validate user input against those schemas.
 
-const signupValidation = (req, res, next) => {
+const student_signupValidation = (req, res, next) => {
     // object ke format me request aane wali hai
     const schema = Joi.object({
         name: Joi.string().min(3).max(100).required(),
@@ -15,7 +15,7 @@ const signupValidation = (req, res, next) => {
     }
     next();
 }
-const loginValidation = (req, res, next) => {
+const student_loginValidation = (req, res, next) => {
     // object ke format me request aane wali hai
     const schema = Joi.object({
         email: Joi.string().email().required(),
@@ -28,7 +28,8 @@ const loginValidation = (req, res, next) => {
     next();
 }
 
+
 module.exports = {
-    signupValidation,
-    loginValidation
+    student_signupValidation,
+    student_loginValidation
 }
