@@ -1,0 +1,21 @@
+const Header = () => {
+    return (
+      <div className="flex justify-between items-center p-4">
+        <div>
+          <h1 className="text-xl font-bold">Good morning,</h1>
+          <p className="text-gray-500">Vivek Kumar Singh</p>
+        </div>
+        <div className="flex items-center">
+          {/* Placeholder for Image */}
+          <div className="w-10 h-10 bg-gray-300 rounded-full mr-4"></div>
+          <div>
+            <p className="text-gray-500">Today,</p>
+            <p className="text-xl font-bold">1 October, 2023</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+  
+  export default Header;
+  
