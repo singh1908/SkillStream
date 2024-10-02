@@ -10,6 +10,9 @@ import StudentSignup from "./StudentPages/StudentSignup";
 import StudentCourses from "./StudentPages/StudentCourses";
 import StudentNotes from "./StudentPages/StudentNotes";
 import StudentTest from "./StudentPages/StudentTest";
+import CameraAccess from "./StudentPages/CameraAccess";
+import ScreenAccess from "./StudentPages/ScreenAccess";
+import TestStart from "./StudentPages/TestStart";
 
 import TeacherLogin from "./TeacherPages/TeacherLogin";
 import TeacherSignup from "./TeacherPages/TeacherSignup";
@@ -18,7 +21,6 @@ import TeacherCourses from "./TeacherPages/TeacherCourses";
 import TeacherNotes from "./TeacherPages/TeacherNotes";
 import TeacherTest from "./TeacherPages/TeacherTest";
 import Select from "./Select";
-
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -44,6 +46,10 @@ function App() {
         <Route path="/student-courses" element={<StudentCourses />} />
         <Route path="/student-notes" element={<StudentNotes />} />
         <Route path="/student-test" element={<StudentTest />} />
+        <Route path="/camera-access" element={<CameraAccess/>}/>
+        <Route path="/screen-access" element={<ScreenAccess/>}/>
+        <Route path="/attempt-quiz" element={<TestStart/>}/>
+
 
         <Route path="/teacher-login" element={<TeacherLogin />} />
         <Route path="/teacher-signup" element={<TeacherSignup />} />
