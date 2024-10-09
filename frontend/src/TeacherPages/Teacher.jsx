@@ -1,107 +1,82 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Teacher = () => {
-  const [questionText, setQuestionText] = useState('');
-  const [options, setOptions] = useState(['', '', '', '']);
-  const [correctOption, setCorrectOption] = useState('');
+function Teacher() {
+  const [subject, setSubject] = useState('');
+  const [questions, setQuestions] = useState([{ questionText: '', options: ['', '', '', ''], correctAnswer: '' }]);
 
-  const handleOptionChange = (index, value) => {
-    const newOptions = [...options];
-    newOptions[index] = value;
-    setOptions(newOptions);
+  const handleAddQuestion = () => {
+    setQuestions([...questions, { questionText: '', options: ['', '', '', ''], correctAnswer: '' }]);
   };
 
-  const handleAddQuestion = async () => {
-    // Validate inputs
-    if (!questionText.trim()) {
-      alert('Please enter a question.');
-      return;
-    }
-    for (let i = 0; i < options.length; i++) {
-      if (!options[i].trim()) {
-        alert(`Please enter option ${i + 1}.`);
-        return;
-      }
-    }
-    if (correctOption === '') {
-      alert('Please select the correct option.');
-      return;
-    }
-
-    const newQuestion = {
-      question: questionText,
-      options: options,
-      answer: parseInt(correctOption),
-    };
-
-    try {
-      await axios.post('http://localhost:8080/api/quiz/add', newQuestion);
-      alert('Question added successfully!');
-      // Reset form
-      setQuestionText('');
-      setOptions(['', '', '', '']);
-      setCorrectOption('');
-    } catch (error) {
-      console.error('Failed to add question:', error);
-      alert('Failed to add question. Please try again.');
-    }
+  const handleSubmit = async () => {
+    await axios.post('http://localhost:8080/api/add-quiz', { subject, questions });
+    alert('Quiz added successfully');
+    // Reset the form
+    setSubject('');
+    setQuestions([{ questionText: '', options: ['', '', '', ''], correctAnswer: '' }]);
   };
 
   return (
-    <div className="bg-white p-8 shadow-lg rounded-md">
-      <h2 className="text-2xl font-bold mb-6">Teacher: Add Questions</h2>
+    <div className="max-w-2xl mx-auto p-4 bg-white shadow-md rounded-lg">
+      <h1 className="text-3xl font-bold mb-4 text-center">Add Quiz</h1>
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">
-          Question:
-        </label>
+        <label className="block text-gray-700 text-sm font-bold mb-2">Subject</label>
         <input
           type="text"
-          value={questionText}
-          onChange={(e) => setQuestionText(e.target.value)}
-          className="border rounded w-full py-2 px-3"
-          placeholder="Enter your question here"
+          placeholder="Subject"
+          value={subject}
+          onChange={(e) => setSubject(e.target.value)}
+          className="w-full border rounded p-2"
         />
       </div>
-      {options.map((option, index) => (
-        <div key={index} className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Option {index + 1}:
-          </label>
+      {questions.map((q, index) => (
+        <div key={index} className="mb-4 p-4 border rounded-lg bg-gray-50">
+          <label className="block text-gray-700 text-sm font-bold mb-2">Question {index + 1}</label>
           <input
             type="text"
-            value={option}
-            onChange={(e) => handleOptionChange(index, e.target.value)}
-            className="border rounded w-full py-2 px-3"
-            placeholder={`Enter option ${index + 1}`}
+            placeholder="Question"
+            value={q.questionText}
+            onChange={(e) => {
+              const newQuestions = [...questions];
+              newQuestions[index].questionText = e.target.value;
+              setQuestions(newQuestions);
+            }}
+            className="w-full border rounded p-2 mb-2"
+          />
+          {q.options.map((option, i) => (
+            <input
+              key={i}
+              type="text"
+              placeholder={`Option ${i + 1}`}
+              value={option}
+              onChange={(e) => {
+                const newQuestions = [...questions];
+                newQuestions[index].options[i] = e.target.value;
+                setQuestions(newQuestions);
+              }}
+              className="w-full border rounded p-2 mb-2"
+            />
+          ))}
+          <input
+            type="text"
+            placeholder="Correct Answer"
+            value={q.correctAnswer}
+            onChange={(e) => {
+              const newQuestions = [...questions];
+              newQuestions[index].correctAnswer = e.target.value;
+              setQuestions(newQuestions);
+            }}
+            className="w-full border rounded p-2"
           />
         </div>
       ))}
-      <div className="mb-6">
-        <label className="block text-gray-700 text-sm font-bold mb-2">
-          Correct Option:
-        </label>
-        <select
-          value={correctOption}
-          onChange={(e) => setCorrectOption(e.target.value)}
-          className="border rounded w-full py-2 px-3"
-        >
-          <option value="">Select correct option</option>
-          {options.map((option, index) => (
-            <option key={index} value={index}>
-              Option {index + 1}
-            </option>
-          ))}
-        </select>
+      <div className="flex justify-between">
+        <button onClick={handleAddQuestion} className="bg-blue-500 text-white p-2 rounded">Add Question</button>
+        <button onClick={handleSubmit} className="bg-green-500 text-white p-2 rounded">Submit Quiz</button>
       </div>
-      <button
-        onClick={handleAddQuestion}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full"
-      >
-        Add Question
-      </button>
     </div>
   );
-};
+}
 
 export default Teacher;

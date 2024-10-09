@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use("/auth", AuthRouter);
 
-app.use('/api/quiz', quizRoutes);
+app.use('/api', quizRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`)

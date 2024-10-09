@@ -15,6 +15,7 @@ import StudentTest from "./StudentPages/StudentTest";
 import CameraAccess from "./StudentPages/CameraAccess";
 import ScreenAccess from "./StudentPages/ScreenAccess";
 import TestStart from "./StudentPages/TestStart";
+import Student from "./StudentPages/Student";
 
 import TeacherLogin from "./TeacherPages/TeacherLogin";
 import TeacherSignup from "./TeacherPages/TeacherSignup";
@@ -64,6 +65,7 @@ function App() {
           <Route path="/camera-access" element={<CameraAccess/>}/>
           <Route path="/screen-access" element={<ScreenAccess/>}/>
           <Route path="/attempt-quiz" element={<TestStart/>}/>
+          <Route path="/quiz/:id" element={<Student />} />
         </Routes>
       </CameraProvider>
     </div>

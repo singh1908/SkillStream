@@ -1,9 +1,16 @@
 const mongoose = require('mongoose');
 
 const questionSchema = new mongoose.Schema({
-  question: { type: String, required: true },
-  options: { type: [String], required: true },
-  answer: { type: Number, required: true }, // Index of the correct option
+  subject: String,
+  questions: [
+    {
+      questionText: String,
+      options: [String],
+      correctAnswer: String,
+    },
+  ],
 });
 
-module.exports = mongoose.model('Question', questionSchema);
+const Question = mongoose.model('Question', questionSchema);
+
+module.exports = Question;
