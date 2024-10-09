@@ -1,28 +1,19 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import { useCamera } from './CameraContext';
 
 const CameraAccess = () => {
-  const [error, setError] = useState(false);
-  const videoRef = useRef(null);
+  const { enableCamera } = useCamera();
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  // Function to access the camera
-  const accessCamera = async () => {
+  const handleEnableCamera = async () => {
     try {
-      // Request access to the user's camera
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        videoRef.current.style.display = 'block'; // Make video visible
-      }
-      setError(false);
-      // After camera access, navigate to the next page
+      await enableCamera(); // This enables the camera and stores the stream in the context
       navigate('/screen-access');
     } catch (err) {
-      // Handle error if camera access is denied
-      console.error('Error accessing camera: ', err);
-      setError(true);
+      setErrorMessage(`Error: Unable to access your camera. ${err.message}`);
     }
   };
 
@@ -48,21 +39,11 @@ const CameraAccess = () => {
           <li>7. If camera access is lost during the test, it may be paused or disqualified.</li>
         </ol>
         <Link>
-            <button onClick={accessCamera} className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
+            <button onClick={handleEnableCamera} className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
             Enable Access
             </button>
         </Link>
-        <video
-        ref={videoRef}
-        className="w-full max-w-md mt-6"
-        autoPlay
-        playsInline
-        style={{ display: 'none' }} // Initially hidden
-      ></video>
-
-      {error && (
-        <p className="text-red-500 mt-4">Error: Unable to access your camera.</p>
-      )}
+        {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
       </div>
     </div>
   );

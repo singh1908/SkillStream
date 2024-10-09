@@ -4,6 +4,8 @@ import { useState } from "react";
 import RefreshHandler from "./RefreshHandler";
 import TeacherRefreshHandler from "./TeacherRefreshHandler";
 
+import { CameraProvider } from "./StudentPages/CameraContext";
+
 import StudentHome from "./StudentPages/StudentHome";
 import StudentLogin from "./StudentPages/StudentLogin";
 import StudentSignup from "./StudentPages/StudentSignup";
@@ -46,9 +48,7 @@ function App() {
         <Route path="/student-courses" element={<StudentCourses />} />
         <Route path="/student-notes" element={<StudentNotes />} />
         <Route path="/student-test" element={<StudentTest />} />
-        <Route path="/camera-access" element={<CameraAccess/>}/>
-        <Route path="/screen-access" element={<ScreenAccess/>}/>
-        <Route path="/attempt-quiz" element={<TestStart/>}/>
+        
 
 
         <Route path="/teacher-login" element={<TeacherLogin />} />
@@ -58,6 +58,14 @@ function App() {
         <Route path="/teacher-notes" element={<TeacherNotes />} />
         <Route path="/teacher-test" element={<TeacherTest />} />
       </Routes>
+
+      <CameraProvider>
+        <Routes>
+          <Route path="/camera-access" element={<CameraAccess/>}/>
+          <Route path="/screen-access" element={<ScreenAccess/>}/>
+          <Route path="/attempt-quiz" element={<TestStart/>}/>
+        </Routes>
+      </CameraProvider>
     </div>
   );
 }
