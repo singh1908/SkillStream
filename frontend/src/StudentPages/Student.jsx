@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useCamera } from "./CameraContext";
+import { Link } from "react-router-dom";
 
 function Student() {
   const { id } = useParams();
@@ -73,7 +74,10 @@ function Student() {
     <div className="max-w-3xl mx-auto p-4 bg-white shadow-md rounded-lg relative">
       {showScore ? (
         <div className="text-center">
-          <h1 className="text-3xl font-bold mb-4">Your Score: {score}</h1>
+          <h1 className="text-3xl font-bold mb-4">Your Score: {score} / {quiz.questions.length} </h1>
+          <Link to="/attempt-quiz">
+            <button className="bg-blue-500 text-white p-2 rounded">Back</button>
+          </Link>
         </div>
       ) : (
         <div>
