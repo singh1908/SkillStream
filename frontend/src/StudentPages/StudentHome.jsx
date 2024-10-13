@@ -11,7 +11,7 @@ const StudentHome = () => {
   return (
     <div>
     <StudentNavSide />
-    <div className="min-h-screen bg-gray-100 p-4">
+    <div className="min-h-screen bg-gray-100 p-4 ml-64">
       {/* Header */}
       <Header />
 

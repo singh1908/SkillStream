@@ -26,7 +26,7 @@ const StudentCourses = () => {
   return (
     <div className="bg-gray-100">
       <StudentNavSide />
-      <div>
+      <div className="ml-64">
         <p className="text-3xl font-bold flex justify-center my-5">
           Uploaded Videos
         </p>

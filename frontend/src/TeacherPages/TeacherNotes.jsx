@@ -26,7 +26,7 @@ const TeacherNotes = () => {
   return (
     <div>
       <TeacherNavSide />
-      <div className="flex justify-center mt-32">
+      <div className="flex justify-center mt-32 ml-64">
         <form onSubmit={submitFile} className="space-y-4 w-full max-w-md shadow-lg p-6">
           <div>
             <label

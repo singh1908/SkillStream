@@ -9,7 +9,7 @@ import { CameraProvider } from "./StudentPages/CameraContext";
 import StudentHome from "./StudentPages/StudentHome";
 import StudentLogin from "./StudentPages/StudentLogin";
 import StudentSignup from "./StudentPages/StudentSignup";
-import StudentCourses from "./StudentPages/StudentCourses";
+import StudentVideos from "./StudentPages/StudentVideos";
 import StudentNotes from "./StudentPages/StudentNotes";
 import StudentTest from "./StudentPages/StudentTest";
 import CameraAccess from "./StudentPages/CameraAccess";
@@ -20,7 +20,7 @@ import Student from "./StudentPages/Student";
 import TeacherLogin from "./TeacherPages/TeacherLogin";
 import TeacherSignup from "./TeacherPages/TeacherSignup";
 import TeacherHome from "./TeacherPages/TeacherHome";
-import TeacherCourses from "./TeacherPages/TeacherCourses";
+import TeacherVideos from "./TeacherPages/TeacherVideos";
 import TeacherNotes from "./TeacherPages/TeacherNotes";
 import TeacherTest from "./TeacherPages/TeacherTest";
 import Select from "./Select";
@@ -46,7 +46,7 @@ function App() {
         <Route path="/student-login" element={<StudentLogin />} />
         <Route path="/student-signup" element={<StudentSignup />} />
         <Route path="/student-home" element={<PrivateRoute element={<StudentHome />} />} />
-        <Route path="/student-courses" element={<StudentCourses />} />
+        <Route path="/student-videos" element={<StudentVideos />} />
         <Route path="/student-notes" element={<StudentNotes />} />
         <Route path="/student-test" element={<StudentTest />} />
         
@@ -55,7 +55,7 @@ function App() {
         <Route path="/teacher-login" element={<TeacherLogin />} />
         <Route path="/teacher-signup" element={<TeacherSignup />} />
         <Route path="/teacher-home" element={<TeacherPrivateRoute element={<TeacherHome />} />} />
-        <Route path="/teacher-courses" element={<TeacherCourses />} />
+        <Route path="/teacher-videos" element={<TeacherVideos />} />
         <Route path="/teacher-notes" element={<TeacherNotes />} />
         <Route path="/teacher-test" element={<TeacherTest />} />
       </Routes>

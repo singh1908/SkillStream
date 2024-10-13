@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleSuccess } from "../toast";
 
 const StudentNavSide = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isVideoDropdownOpen, setIsVideoDropdownOpen] = useState(false);
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+  const toggleVideoDropdown = () => {
+    setIsVideoDropdownOpen(!isVideoDropdownOpen);
   };
 
   const [loggedInUser, setLoggedInUser] = useState("");
@@ -24,74 +23,49 @@ const StudentNavSide = () => {
     handleSuccess("User Logout Successfully");
     setTimeout(() => {
       navigate("/student-login");
-      //logout karne ke baad previous arrow daba ke wapas se logout wale pe nhi jaa payenge
       window.location.reload(false);
     }, 1000);
   };
 
   return (
     <div className="flex">
-      {/* Sidebar */}
-      <div
-        className={`bg-gray-800 text-white w-64 p-4 transition-transform duration-300 ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } fixed inset-y-0 left-0 z-10`}
-      >
-        <h2 className="text-lg font-bold mb-4">Welcome, {loggedInUser}</h2>
-        <hr className="my-2 border-gray-600" />
+      {/* Fixed Sidebar */}
+      <div className="w-64 p-4 fixed inset-y-0 left-0 z-10 border-r border-gray-300 bg-blue-700">
+        <h2 className="text-lg font-bold mb-4 text-white">Welcome, {loggedInUser}</h2>
+        <hr className="my-2 border-gray-300" />
         <nav className="flex flex-col">
-          <Link to="/student-home" className="p-2 hover:bg-gray-700 rounded-lg">
+          <Link to="/student-home" className="p-2 hover:bg-blue-300 hover:text-black text-white rounded-lg">
             Home
           </Link>
-          <Link to="/student-courses" className="p-2 hover:bg-gray-700 rounded-lg">
+          <button onClick={toggleVideoDropdown} className="p-2 hover:bg-blue-300 hover:text-black text-white rounded-lg flex justify-between">
             Courses
-          </Link>
-          <Link to="/student-notes" className="p-2 hover:bg-gray-700 rounded-lg">
-            Notes
-          </Link>
-          <Link to="/student-test" className="p-2 hover:bg-gray-700 rounded-lg">
-            Test
-          </Link>
+            <span className={`transform transition-transform ${isVideoDropdownOpen ? "rotate-180" : "rotate-0"}`}>
+              &#9662; {/* Unicode for a downward arrow */}
+            </span>
+          </button>
+          <div className={`transition-max-height duration-300 ease-in-out overflow-hidden ${isVideoDropdownOpen ? 'max-h-40' : 'max-h-0'}`}>
+            <div className="pl-6 flex flex-col">
+              <Link to="/student-videos" className="p-2 hover:bg-blue-300 hover:text-black text-white rounded-lg">
+                Videos
+              </Link>
+              <Link to="/student-notes" className="p-2 hover:bg-blue-300 hover:text-black text-white rounded-lg">
+                Notes
+              </Link>
+              <Link to="/student-test" className="p-2 hover:bg-blue-300 hover:text-black text-white rounded-lg">
+                Test
+              </Link>
+            </div>
+          </div>
         </nav>
       </div>
-
-      {/* Overlay for sidebar */}
-      <div
-        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity ${
-          isSidebarOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        }`}
-        onClick={toggleSidebar}
-      />
-
       {/* Main content */}
-      <div className="w-lvw">
+      <div className="w-full ml-64">
         {/* Navbar */}
         <div className="flex bg-white shadow-md p-5 justify-between">
           <div className="flex justify-center items-center">
-            <button
-            onClick={toggleSidebar}
-            className="mr-4 text-gray-800 focus:outline-none"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            </svg>
-          </button>
-          <Link to="/student-home" className="text-xl font-semibold">
-            SkillStream
-          </Link>
+            <Link to="/student-home" className="text-xl font-semibold">
+              SkillStream
+            </Link>
           </div>
           <button
             onClick={handleLogout}

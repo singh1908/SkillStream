@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleSuccess } from "../toast";
 
 const TeacherNavSide = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isVideoDropdownOpen, setIsVideoDropdownOpen] = useState(false);
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+  const toggleVideoDropdown = () => {
+    setIsVideoDropdownOpen(!isVideoDropdownOpen);
   };
 
   const [loggedInTeacher, setLoggedInTeacher] = useState("");
@@ -24,82 +23,46 @@ const TeacherNavSide = () => {
     handleSuccess("User Logout Successfully");
     setTimeout(() => {
       navigate("/teacher-login");
-      //logout karne ke baad previous arrow daba ke wapas se logout wale pe nhi jaa payenge
       window.location.reload(false);
     }, 1000);
   };
 
   return (
     <div className="flex">
-      {/* Sidebar */}
-      <div
-        className={`bg-gray-800 text-white w-64 p-4 transition-transform duration-300 ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } fixed inset-y-0 left-0 z-10`}
-      >
-        <h2 className="text-lg font-bold mb-4">Welcome, {loggedInTeacher}</h2>
-        <hr className="my-2 border-gray-600" />
-        <nav
-          className={`flex flex-col transition-transform duration-300 ${
-            isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
-          onClick={toggleSidebar}
-        >
-          <Link to="/teacher-home" className="p-2 hover:bg-gray-700 rounded-lg">
+      {/* Fixed Sidebar */}
+      <div className="w-64 p-4 fixed inset-y-0 left-0 z-10 border-r border-gray-300 bg-blue-700">
+        <h2 className="text-lg font-bold mb-4 text-white">Welcome, {loggedInTeacher}</h2>
+        <hr className="my-2 border-gray-300" />
+        <nav className="flex flex-col">
+          <Link to="/teacher-home" className="p-2 hover:text-black hover:bg-gray-200 rounded-lg text-white">
             Home
           </Link>
-          <Link
-            to="/teacher-courses"
-            className="p-2 hover:bg-gray-700 rounded-lg"
-          >
+          <button onClick={toggleVideoDropdown} className="p-2 text-white hover:text-black hover:bg-gray-200 rounded-lg flex justify-between">
             Courses
-          </Link>
-          <Link
-            to="/teacher-notes"
-            className="p-2 hover:bg-gray-700 rounded-lg"
-          >
-            Notes
-          </Link>
-          <Link to="/teacher-test" className="p-2 hover:bg-gray-700 rounded-lg">
-            Test
-          </Link>
+            <span className={`transform transition-transform ${isVideoDropdownOpen ? "rotate-180" : "rotate-0"}`}>
+              &#9662; {/* Unicode for a downward arrow */}
+            </span>
+          </button>
+          <div className={`transition-max-height duration-300 ease-in-out overflow-hidden ${isVideoDropdownOpen ? 'max-h-40' : 'max-h-0'}`}>
+            <div className="pl-6 flex flex-col">
+              <Link to="/teacher-videos" className="p-2 hover:bg-gray-200 hover:text-black rounded-lg text-white">
+                Videos
+              </Link>
+              <Link to="/teacher-notes" className="p-2 hover:bg-gray-200 hover:text-black rounded-lg text-white">
+                Notes
+              </Link>
+              <Link to="/teacher-test" className="p-2 hover:bg-gray-200 hover:text-black rounded-lg text-white">
+                Test
+              </Link>
+            </div>
+          </div>
         </nav>
       </div>
-
-      {/* Overlay for sidebar */}
-      <div
-        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity ${
-          isSidebarOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        }`}
-        onClick={toggleSidebar}
-      />
-
       {/* Main content */}
-      <div className="w-lvw">
+      <div className="w-full ml-64">
         {/* Navbar */}
         <div className="flex bg-white shadow-md p-5 justify-between">
           <div className="flex justify-center items-center">
-            <button
-              onClick={toggleSidebar}
-              className="mr-4 text-gray-800 focus:outline-none"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16m-7 6h7"
-                />
-              </svg>
-            </button>
             <Link to="/teacher-home" className="text-xl font-semibold">
               SkillStream
             </Link>
