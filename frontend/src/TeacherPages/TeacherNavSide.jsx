@@ -34,10 +34,10 @@ const TeacherNavSide = () => {
         <h2 className="text-lg font-bold mb-4 text-white">Welcome, {loggedInTeacher}</h2>
         <hr className="my-2 border-gray-300" />
         <nav className="flex flex-col">
-          <Link to="/teacher-home" className="p-2 hover:text-black hover:bg-gray-200 rounded-lg text-white">
+          <Link to="/teacher-home" className="p-2 hover:text-black hover:bg-blue-300 rounded-lg text-white">
             Home
           </Link>
-          <button onClick={toggleVideoDropdown} className="p-2 text-white hover:text-black hover:bg-gray-200 rounded-lg flex justify-between">
+          <button onClick={toggleVideoDropdown} className="p-2 text-white hover:text-black hover:bg-blue-300 rounded-lg flex justify-between">
             Courses
             <span className={`transform transition-transform ${isVideoDropdownOpen ? "rotate-180" : "rotate-0"}`}>
               &#9662; {/* Unicode for a downward arrow */}
@@ -45,13 +45,13 @@ const TeacherNavSide = () => {
           </button>
           <div className={`transition-max-height duration-300 ease-in-out overflow-hidden ${isVideoDropdownOpen ? 'max-h-40' : 'max-h-0'}`}>
             <div className="pl-6 flex flex-col">
-              <Link to="/teacher-videos" className="p-2 hover:bg-gray-200 hover:text-black rounded-lg text-white">
+              <Link to="/teacher-videos" className="p-2 hover:bg-blue-300 hover:text-black rounded-lg text-white">
                 Videos
               </Link>
-              <Link to="/teacher-notes" className="p-2 hover:bg-gray-200 hover:text-black rounded-lg text-white">
+              <Link to="/teacher-notes" className="p-2 hover:bg-blue-300 hover:text-black rounded-lg text-white">
                 Notes
               </Link>
-              <Link to="/teacher-test" className="p-2 hover:bg-gray-200 hover:text-black rounded-lg text-white">
+              <Link to="/teacher-test" className="p-2 hover:bg-blue-300 hover:text-black rounded-lg text-white">
                 Test
               </Link>
             </div>
