@@ -25,6 +25,7 @@ import TeacherNotes from "./TeacherPages/TeacherNotes";
 import TeacherTest from "./TeacherPages/TeacherTest";
 import Select from "./Select";
 
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isTeacherAuthenticated, setIsTeacherAuthenticated] = useState(false);
@@ -68,7 +69,11 @@ function App() {
           <Route path="/quiz/:id" element={<Student />} />
         </Routes>
       </CameraProvider>
+
+
     </div>
+    
+    
   );
 }
 

@@ -5,6 +5,7 @@ import TestAlertBox from './TestAlertBox';
 import OngoingTest from './OngoingTest';
 import AvgReport from './AvgReport';
 import TotalAttempts from './TotalAttempts';
+import ChatbotPopup from "../components/ChatbotPopup";
 
 const StudentHome = () => {
 
@@ -35,6 +36,7 @@ const StudentHome = () => {
         <TotalAttempts />
       </div>
     </div>
+    <ChatbotPopup />
     </div>
     
   );

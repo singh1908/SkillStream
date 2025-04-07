@@ -1,6 +1,7 @@
 import React from "react";
 import TeacherNavSide from "./TeacherNavSide";
 import Teacher from "./Teacher";
+import ChatbotPopup from "../components/ChatbotPopup";
 
 const TeacherTest = () => {
   return (
@@ -13,6 +14,7 @@ const TeacherTest = () => {
           </div>
         </div>
       </div>
+      <ChatbotPopup/>
     </div>
   );
 };

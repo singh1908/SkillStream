@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import StudentNavSide from "./StudentNavSide";
+import ChatbotPopup from "../components/ChatbotPopup";
 
 const StudentTest = () => {
   return (
@@ -22,6 +23,7 @@ const StudentTest = () => {
           </Link>
         </div>
       </div>
+      <ChatbotPopup/>
     </div>
   );
 };

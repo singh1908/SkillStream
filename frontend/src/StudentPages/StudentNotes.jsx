@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import StudentNavSide from "./StudentNavSide";
 import axios from "axios";
+import ChatbotPopup from "../components/ChatbotPopup";
 
 const StudentNotes = () => {
   const [allFile, setAllFile] = useState(null);
@@ -49,6 +50,7 @@ const StudentNotes = () => {
               })}
         </div>
       </div>
+      <ChatbotPopup/>
     </div>
   );
 };

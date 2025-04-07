@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TeacherNavSide from './TeacherNavSide';
 import axios from "axios";
 import { handleSuccess } from "../toast";
+import ChatbotPopup from "../components/ChatbotPopup";
 
 const TeacherCourses = () => {
   const [title, setTitle] = useState("");
@@ -70,6 +71,7 @@ const TeacherCourses = () => {
           </button>
         </form>
       </div>
+      <ChatbotPopup/>
     </div>
   );
 }

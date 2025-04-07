@@ -8,6 +8,7 @@ require("./Models/db");
 const AuthRouter = require("./Routes/AuthRouter");
 const path = require("path");
 const quizRoutes = require("./Routes/quizRoutes");
+const chatRoutes = require('./Routes/chatRoutes');
 
 
 const PORT = process.env.PORT || 8080;
@@ -15,6 +16,8 @@ const PORT = process.env.PORT || 8080;
 app.use(bodyParser.json());
 app.use(cors());
 app.use("/auth", AuthRouter);
+
+app.use('/api/chat', chatRoutes);
 
 app.use('/api', quizRoutes);
 
